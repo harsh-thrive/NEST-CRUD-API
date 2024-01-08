@@ -7,20 +7,30 @@ export class StudentService {
     private studentArr: Student[] = [];
     
     getAllStudents(): Student[] {
-        return this.studentArr;
+        let students: Student[] = this.studentArr;
+        return students
     }
 
     getStudent(id: number): Student {
-        let stud: Student = this.studentArr.find((item)=>item.id === id);
-        return stud;
+        try{
+            let stud: Student = this.studentArr.find((item)=>item.id === id);
+            return stud;
+        }
+        catch(error){
+            console.log("Error in fetching student:",error)
+        }
     }
 
     createStudent(student: Student): Student{
-        if(this.getStudent(student.id)){
-            return null;
+        try{
+            !this.getStudent(student.id) && this.studentArr.push(student)
+            let newStudent: Student = this.getStudent(student.id) ? null : student
+            return newStudent;
         }
-        this.studentArr.push(student);
-        return student;
+        catch(error){
+            console.log("Error in creating new Srudent:",error)
+        }
+        
     }
 
     updateStudent(student: Student) {
