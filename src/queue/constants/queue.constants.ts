@@ -1,0 +1,1 @@
+export const OPEN_SEARCH_QUEUE = 'open_search_queue'
